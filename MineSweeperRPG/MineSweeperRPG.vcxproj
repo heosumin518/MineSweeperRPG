@@ -129,12 +129,14 @@
   <ItemGroup>
     <ClCompile Include="gameManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="minesweeper.cpp" />
     <ClCompile Include="title.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gameManager.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="minesweeper.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>

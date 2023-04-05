@@ -3,6 +3,6 @@
 #include "util.h"
 #include "gameManager.h"
 
-void descOneDraw();		// 게임시작 정보 출력
 void titleDraw();		// 타이틀 출력
 int menuDraw();			// 메인 메뉴 출력
+void howToPlay();		// 게임 방법 출력
