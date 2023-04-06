@@ -8,20 +8,16 @@ int mineSweeper()
 
 	char mine_table[Y_COUNT][X_COUNT];	// 폭탄이 설치된 정보를 저장할 변수
 	char check_table[Y_COUNT][X_COUNT]; // 사용자가 선택한 위치를 기억할 변수
+	char flag_table[Y_COUNT][X_COUNT];	// 깃발이 설치된 정보를 저장할 변수
 	srand((unsigned)time(NULL));		// 현재 시간을 기준으로 난수를 설정.
 
-	createMineTable(mine_table, check_table);		// 폭탄 설치 정보를 구성한다.
+	createMineTable(mine_table, check_table, flag_table);		// 폭탄 설치 정보를 구성한다.
 
 	// 선택 정보를 반영하여 지뢰 정보를 출력한다.
 	// @ 문자로 출력된 것은 아직 확인이 안된 항목이다.
 	showCurrentState(mine_table, check_table);
 
-	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);	// 콘솔 핸들 가져오기
-	CONSOLE_CURSOR_INFO ConsoleCursor;
-	ConsoleCursor.bVisible = true;
-	ConsoleCursor.dwSize = 1;
-	SetConsoleCursorInfo(consoleHandle, &ConsoleCursor);
-	
+	setCursorView(true);	// 커서 보이게 설정
 
 	int x = 0;
 	int y = 0;
@@ -46,28 +42,55 @@ int mineSweeper()
 			}
 			else		// 폭탄이 아닐 경우
 			{
-				if (mine_table[y][m_col] == '^')		// 깃발을 눌렀을 경우 아무일도 일어나지 않음
-				{
-					continue; 
-				}
+				//if (mine_table[y][m_col] == '^')		// 깃발을 눌렀을 경우 아무일도 일어나지 않음
+				//{
+				//	continue; 
+				//}
 				int col = (x / 2);
 				if (mine_table[y][m_col] == '0') printf("  ");
 				else printf(" %c", mine_table[y][m_col]);
+				check_table[y][m_col]++;
 				gotoxy(x, y);
 				// 주위 검색해서 지뢰가 모두 없다면 다 열기 (그거 구현)
 			}
 		}
 		if (ch == 70 || ch == 102)	// 사용자가 F 키를 누를 경우 깃발 꽃기
 		{
-			printf("◈");
-			gotoxy(x, y);
-			if (mine_table[y][m_col] == '*')	// 폭탄일 경우
+			
+			
+
+			if (flag_table[y][m_col] == '^')	// 이미 깃발 표시를 한 곳일 경우
 			{
+				flag_table[y][m_col] = '0';
+				check_table[y][m_col] = 0;	// 확인 하지 않은곳으로 표시
+				flag -= 1;		// 맵 내의 전체 깃발 수 감소
+
+				printf("■");
+				gotoxy(x, y);
+
+				continue;
+			}
+
+			if (mine_table[y][m_col] != '*')	// 폭탄이 아닐경우
+			{
+				if (check_table[y][m_col] >= 1)
+				{
+					continue;		// 숫자 칸에는 깃발 표시 안함
+				}
+				printf("◈");
+				gotoxy(x, y);
+				flag_table[y][m_col] = '^';
+			}
+			else if (mine_table[y][m_col] == '*')	// 폭탄일 경우
+			{
+				
 				if (check_table[y][m_col] == 0)		// 했던 곳인지 확인
 				{
 					check_table[y][m_col]++;
-					mine_table[y][m_col] = '^';
+					flag_table[y][m_col] = '^';
 					flag += 1;
+					printf("◈");
+					gotoxy(x, y);
 
 					if (flag == MINE_COUNT)		// 지뢰를 모두 깃발표시 하였을 경우
 					{
@@ -78,10 +101,7 @@ int mineSweeper()
 					}
 				}
 			}
-			else	// 폭탄이 아닐경우, 깃발 꽂기
-			{
-				mine_table[y][m_col] = '^';
-			}
+			
 		}
 
 		if (ch == 224)	// 방향이 이동
@@ -105,7 +125,7 @@ int mineSweeper()
 					break;
 				}
 				case 77: {	// 오른쪽으로 이동
-					if ((m_col+1) < X_COUNT*2)	// 범위 나가지 않게
+					if ((m_col+1) < X_COUNT)	// 범위 나가지 않게
 						x += 2;
 					break;
 				}
@@ -120,13 +140,15 @@ int mineSweeper()
 	return 0; // 임시. 이 함수 완성하면서 삭제하기
 }
 
-void createMineTable(char mine_table[][X_COUNT], char check_table[][X_COUNT])
+void createMineTable(char mine_table[][X_COUNT], char check_table[][X_COUNT], char flag_table[][X_COUNT])
 {
 	int x, y, mine_count;
 	// mine 정보를 저장할 메모리에 모두 0을 채운다.
 	memset(mine_table, 0, Y_COUNT * X_COUNT);
 	// 사용자의 선택 정보를 저장할 메모리에 모두 0을 채운다.
 	memset(check_table, 0, Y_COUNT * X_COUNT);
+	// flag 정보를 저장할 메모리에 모두 0을 채운다.
+	memset(flag_table, 0, Y_COUNT * X_COUNT);
 
 	// 폭탄을 MINE_COUNT 개 만큼 생성한다.
 	for (mine_count = 0; mine_count < MINE_COUNT; mine_count++) {

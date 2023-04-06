@@ -5,6 +5,7 @@ void titleDraw()
 {
 	int x = 10;
 	int y = 5;
+	setCursorView(false);
 
 	gotoxy(x, y + 0);  printf("              d8b                                                                                      ");
 	gotoxy(x, y + 1);  printf("              Y8P                                                                                      ");
