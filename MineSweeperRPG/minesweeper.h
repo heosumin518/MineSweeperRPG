@@ -8,9 +8,9 @@
 #ifndef COUNT
 #define COUNT
 
-#define MINE_COUNT 10	// 초급 10, 중급 40, 상급 99
-#define X_COUNT    9	// 초급  9, 중급 16, 상급 30
-#define Y_COUNT    9	// 초급  9, 중급 16, 상급 16
+#define MINE_COUNT 8	// 초급 10, 중급 40, 상급 99
+#define X_COUNT    6	// 초급  9, 중급 16, 상급 30
+#define Y_COUNT    6	// 초급  9, 중급 16, 상급 16
 
 #endif
 

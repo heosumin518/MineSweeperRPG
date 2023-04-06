@@ -27,14 +27,16 @@ int mineSweeper()
 	int y = 0;
 	int flag = 0;
 	int count = 0;
+	int m_col;
 	gotoxy(x, y);
 	while (true) {
+		m_col = (x / 2);
 		int ch = _getch();
 		if (ch == 112)  // P 를 눌렀을 경우 플레이 종료
 			break;
 		if (ch == 32)	// 스페이스 키를 칠 경우 칸을 연다
 		{
-			if (mine_table[y][x] == '*')	// 폭탄일 경우
+			if (mine_table[y][m_col] == '*')	// 폭탄일 경우
 			{
 				printf("*");
 				gotoxy(50, 50);
@@ -44,26 +46,32 @@ int mineSweeper()
 			}
 			else		// 폭탄이 아닐 경우
 			{
-				if (mine_table[y][x] == '0') printf(" ");
-				else printf("%c", mine_table[y][x]);
+				if (mine_table[y][m_col] == '^')		// 깃발을 눌렀을 경우 아무일도 일어나지 않음
+				{
+					continue; 
+				}
+				int col = (x / 2);
+				if (mine_table[y][m_col] == '0') printf("  ");
+				else printf(" %c", mine_table[y][m_col]);
 				gotoxy(x, y);
 				// 주위 검색해서 지뢰가 모두 없다면 다 열기 (그거 구현)
 			}
 		}
 		if (ch == 70 || ch == 102)	// 사용자가 F 키를 누를 경우 깃발 꽃기
 		{
-			printf("^");
+			printf("◈");
 			gotoxy(x, y);
-			if (mine_table[y][x] == '*')	// 폭탄일 경우
+			if (mine_table[y][m_col] == '*')	// 폭탄일 경우
 			{
-				if (check_table[y][x] == 0)		// 했던 곳인지 확인
+				if (check_table[y][m_col] == 0)		// 했던 곳인지 확인
 				{
-					check_table[y][x]++;
+					check_table[y][m_col]++;
+					mine_table[y][m_col] = '^';
 					flag += 1;
 
 					if (flag == MINE_COUNT)		// 지뢰를 모두 깃발표시 하였을 경우
 					{
-						gotoxy(0, 0);
+						gotoxy(0, 9);
 						printf("지뢰를 모두 찾았습니다!\n");
 						Sleep(2000);
 						break;
@@ -72,7 +80,7 @@ int mineSweeper()
 			}
 			else	// 폭탄이 아닐경우, 깃발 꽂기
 			{
-				mine_table[y][x] = '^';
+				mine_table[y][m_col] = '^';
 			}
 		}
 
@@ -92,13 +100,13 @@ int mineSweeper()
 					break;
 				}
 				case 75: {	// 왼쪽으로 이동
-					if ((x - 1) >= 0)	// 범위 나가지 않게
-						x -= 1;
+					if ((m_col-1) >= 0)	// 범위 나가지 않게
+						x -= 2;
 					break;
 				}
 				case 77: {	// 오른쪽으로 이동
-					if ((x + 1) < X_COUNT)	// 범위 나가지 않게
-						x += 1;
+					if ((m_col+1) < X_COUNT*2)	// 범위 나가지 않게
+						x += 2;
 					break;
 				}
 			}
@@ -186,8 +194,11 @@ void showCurrentState(char mine_table[][X_COUNT], char check_table[][X_COUNT])		
 	for (int y = 0; y < Y_COUNT; y++) {
 		// 한 줄의 정보를 출력한다.
 		for (int x = 0; x < X_COUNT; x++) {
-			if (check_table[y][x]) printf("%c", mine_table[y][x]);
-			else printf("@");
+			if (check_table[y][x])
+			{
+				printf("% 2c", mine_table[y][x]);
+			}
+			else printf("■");
 		}
 		printf("\n"); // 줄바꿈
 	}
