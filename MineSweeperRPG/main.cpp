@@ -12,8 +12,21 @@ int main()
 	{
 		titleDraw();
 		int menuCode = menuDraw();
+		bool isWin = false;
 		if		(menuCode == 0) {
-			mineSweeper();	// 게임시작
+			isWin = gamePlay();
+			gotoxy(0, 35);
+			printf("게임종료");
+			if (isWin)
+			{
+				gotoxy(40, 35);
+				printf("플레이어의 승리!");
+			}
+			else
+			{
+				gotoxy(40, 35);
+				printf("패배..!");
+			}
 			system("pause");	// 디버깅용. 이후 삭제하기
 		}
 		else if (menuCode == 1) {

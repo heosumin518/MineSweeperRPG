@@ -1,6 +1,7 @@
 #pragma once
 #include "main.h"
 #include "util.h"
+#include "minesweeper.h"
 
 #ifndef KEY_CODE
 #define KEY_CODE
@@ -14,4 +15,5 @@
 
 #endif
 
+bool gamePlay();
 int keyControl();
