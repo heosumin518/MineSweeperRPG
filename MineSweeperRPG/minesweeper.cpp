@@ -61,12 +61,8 @@ int mineSweeper(int monster, int player)
 	printf("열기: Space bar");
 
 	// 지뢰보드 외곽네모상자 그리기
-	gotoxy(49, 18);
-	printf("┌─────────────────┐");
-	gotoxy(49, 19);
-	printf("│                 │");
 	gotoxy(49, 20);
-	printf("│                 │");
+	printf("┌─────────────────┐");
 	gotoxy(49, 21);
 	printf("│                 │");
 	gotoxy(49, 22);
@@ -80,6 +76,10 @@ int mineSweeper(int monster, int player)
 	gotoxy(49, 26);
 	printf("│                 │");
 	gotoxy(49, 27);
+	printf("│                 │");
+	gotoxy(49, 28);
+	printf("│                 │");
+	gotoxy(49, 29);
 	printf("└─────────────────┘");
 
 
@@ -91,7 +91,7 @@ int mineSweeper(int monster, int player)
 
 
 	_setmode(_fileno(stdout), _O_U16TEXT); // 출력 스트림의 인코딩 방식을 UTF-16LE로 변경
-	ColorSet(0, 9);
+	ColorSet(0, 3);
 	gotoxy(80, 20);
 	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣤⣤\n");
 	gotoxy(80, 21);
@@ -150,6 +150,31 @@ int mineSweeper(int monster, int player)
 	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
 	gotoxy(12, 32);
 	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+
+
+	gotoxy(48, 6);
+	wprintf(L" ▄▄▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄▄ ");
+	gotoxy(48, 7);
+	wprintf(L" █ ▄▄▄ █  █▄▀  █ ▄▄▄ █ ");
+	gotoxy(48, 8);
+	wprintf(L" █ ███ █  ▀█▀▄ █ ███ █ ");
+	gotoxy(48, 9);
+	wprintf(L" █▄▄▄▄▄█ ▄ ▄▀█ █▄▄▄▄▄█ ");
+	gotoxy(48, 10);
+	wprintf(L" ▄▄ ▄▄ ▄ ▀██▀█ ▄     ▄ ");
+	gotoxy(48, 11);
+	wprintf(L" ▄ █▄ █▄ ▀▀▄ ▀ ▀█▄█▄   ");
+	gotoxy(48, 12);
+	wprintf(L" ▄▀▀▀▄█▄▀ ▀▄▀  ▀▄ ▀ █▀ ");
+	gotoxy(48, 13);
+	wprintf(L" ▄▄▄▄▄▄▄ ▀▀  ██▀ ▀▀█▀▄ ");
+	gotoxy(48, 14);
+	wprintf(L" █ ▄▄▄ █ ▄█▀▀▀▀ ▄██ ▄▀ ");
+	gotoxy(48, 15);
+	wprintf(L" █ ███ █ ▀▄▀▄▀██▄ ▀ ▄▄ ");
+	gotoxy(48, 16);
+	wprintf(L" █▄▄▄▄▄█ █▀▄▄██ █▀ ▄▀▀ ");
+	// 무단결석
 	_setmode(_fileno(stdout), _O_TEXT); // 출력 스트림의 인코딩 방식을 기본으로 변경
 
 
@@ -162,7 +187,7 @@ int mineSweeper(int monster, int player)
 	int y = 0;
 
 	int xx = 53;	// 지뢰판 위치 옮김용 // 이 수치값과 showCurrentState 함수에 있는 xx, yy 값을 조정하면 지뢰판의 위치를 이동시킬 수 있음
-	int yy = 20;
+	int yy = 22;
 
 	int flag = 0;
 	int count = 0;
@@ -288,6 +313,7 @@ int mineSweeper(int monster, int player)
 				}
 			}
 			gotoxy(xx + x, yy + y);
+
 		}
 		
 	}
@@ -372,7 +398,7 @@ void showMineTable(char mine_table[][X_COUNT])		// 게임 종료시 전체 지�
 void showCurrentState(char mine_table[][X_COUNT], char check_table[][X_COUNT])		// 현재 지뢰게임보드 상태를 보여주는 함수
 {
 	int xx = 53;
-	int yy = 20;
+	int yy = 22;
 	int size = 6;
 
 	for (int i = 0; i < size; i++)
