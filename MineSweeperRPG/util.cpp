@@ -3,7 +3,7 @@
 
 void init()
 {
-	system("mode con cols=120 lines=36 | title 지뢰찾기 RPG");		// 콘솔창 크기 초기화
+	system("mode con cols=118 lines=36 | title 지뢰찾기 RPG");		// 콘솔창 크기 초기화
 	setCursorView(false);
 }
 

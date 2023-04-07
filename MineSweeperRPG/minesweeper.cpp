@@ -21,18 +21,25 @@ int mineSweeper()
 
 	int x = 0;
 	int y = 0;
+
+	int xx = 53;	// 지뢰판 위치 옮김용
+	int yy = 15;
+
 	int flag = 0;
 	int count = 0;
 	int m_col;
-	gotoxy(x, y);
+	int m_row;
+
+	gotoxy(xx + x, yy + y);
 	while (true) {
-		m_col = (x / 2);
+		m_col = x / 2;
+		m_row = y;
 		int ch = _getch();
 		if (ch == 112)  // P 를 눌렀을 경우 플레이 종료
 			break;
 		if (ch == 32)	// 스페이스 키를 칠 경우 칸을 연다
 		{
-			if (mine_table[y][m_col] == '*')	// 폭탄일 경우
+			if (mine_table[m_row][m_col] == '*')	// 폭탄일 경우
 			{
 				printf("*");
 				gotoxy(50, 50);
@@ -46,12 +53,15 @@ int mineSweeper()
 				//{
 				//	continue; 
 				//}
-				int col = (x / 2);
-				if (mine_table[y][m_col] == '0') printf("  ");
-				else printf(" %c", mine_table[y][m_col]);
-				check_table[y][m_col]++;
-				gotoxy(x, y);
-				// 주위 검색해서 지뢰가 모두 없다면 다 열기 (그거 구현)
+				
+				//int col = (x / 2);
+
+				if (mine_table[m_row][m_col] == '0') printf("  ");
+				else printf(" %c", mine_table[m_row][m_col]);
+				check_table[m_row][m_col]++;	// 확인한 곳으로 체크
+
+				gotoxy(xx + x, yy + y);
+
 			}
 		}
 		if (ch == 70 || ch == 102)	// 사용자가 F 키를 누를 경우 깃발 꽃기
@@ -59,38 +69,38 @@ int mineSweeper()
 			
 			
 
-			if (flag_table[y][m_col] == '^')	// 이미 깃발 표시를 한 곳일 경우
+			if (flag_table[m_row][m_col] == '^')	// 이미 깃발 표시를 한 곳일 경우
 			{
-				flag_table[y][m_col] = '0';
-				check_table[y][m_col] = 0;	// 확인 하지 않은곳으로 표시
+				flag_table[m_row][m_col] = '0';
+				check_table[m_row][m_col] = 0;	// 확인 하지 않은곳으로 표시
 				flag -= 1;		// 맵 내의 전체 깃발 수 감소
 
 				printf("■");
-				gotoxy(x, y);
+				gotoxy(xx + x, yy + y);
 
 				continue;
 			}
 
-			if (mine_table[y][m_col] != '*')	// 폭탄이 아닐경우
+			if (mine_table[m_row][m_col] != '*')	// 폭탄이 아닐경우
 			{
-				if (check_table[y][m_col] >= 1)
+				if (check_table[m_row][m_col] >= 1)
 				{
 					continue;		// 숫자 칸에는 깃발 표시 안함
 				}
 				printf("◈");
-				gotoxy(x, y);
-				flag_table[y][m_col] = '^';
+				gotoxy(xx + x, yy + y);
+				flag_table[m_row][m_col] = '^';
 			}
-			else if (mine_table[y][m_col] == '*')	// 폭탄일 경우
+			else if (mine_table[m_row][m_col] == '*')	// 폭탄일 경우
 			{
 				
-				if (check_table[y][m_col] == 0)		// 했던 곳인지 확인
+				if (check_table[m_row][m_col] == 0)		// 했던 곳인지 확인
 				{
-					check_table[y][m_col]++;
-					flag_table[y][m_col] = '^';
+					check_table[m_row][m_col]++;
+					flag_table[m_row][m_col] = '^';
 					flag += 1;
 					printf("◈");
-					gotoxy(x, y);
+					gotoxy(xx + x, yy + y);
 
 					if (flag == MINE_COUNT)		// 지뢰를 모두 깃발표시 하였을 경우
 					{
@@ -120,17 +130,17 @@ int mineSweeper()
 					break;
 				}
 				case 75: {	// 왼쪽으로 이동
-					if ((m_col-1) >= 0)	// 범위 나가지 않게
+					if ((m_col - 1) >= 0)	// 범위 나가지 않게
 						x -= 2;
 					break;
 				}
 				case 77: {	// 오른쪽으로 이동
-					if ((m_col+1) < X_COUNT)	// 범위 나가지 않게
+					if ((m_col + 1) < X_COUNT)	// 범위 나가지 않게
 						x += 2;
 					break;
 				}
 			}
-			gotoxy(x, y);
+			gotoxy(xx + x, yy + y);
 		}
 		
 	}
@@ -201,7 +211,8 @@ void createMineTable(char mine_table[][X_COUNT], char check_table[][X_COUNT], ch
 
 void showMineTable(char mine_table[][X_COUNT])		// 게임 종료시 전체 지뢰를 보여주는 함수
 {
-	system("cls");	// 화면 한번 지우기 // 임 ******** 시
+	//system("cls");	// 화면 한번 지우기 // 임 ******** 시
+	printf("\n");
 	for (int y = 0; y < Y_COUNT; y++) {
 		// 한 줄의 정보를 출력한다.
 		printf(" ");
@@ -213,16 +224,39 @@ void showMineTable(char mine_table[][X_COUNT])		// 게임 종료시 전체 지뢰를 보여�
 
 void showCurrentState(char mine_table[][X_COUNT], char check_table[][X_COUNT])		// 현재 지뢰게임보드 상태를 보여주는 함수
 {
-	for (int y = 0; y < Y_COUNT; y++) {
-		// 한 줄의 정보를 출력한다.
-		for (int x = 0; x < X_COUNT; x++) {
-			if (check_table[y][x])
-			{
-				printf("% 2c", mine_table[y][x]);
-			}
-			else printf("■");
+	int xx = 53;
+	int yy = 15;
+	int size = 6;
+
+	for (int i = 0; i < size; i++)
+	{
+		gotoxy(xx, yy);
+		for (int j = 0; j < size; j++)
+		{
+			printf("■");
 		}
-		printf("\n"); // 줄바꿈
+		yy = yy + 1;
 	}
-	printf("\n");	// 줄바꿈
+
+	//for (int y = 0; y < Y_COUNT; y++) {
+	//	// 한 줄의 정보를 출력한다.
+	//	for (int x = 0; x <= X_COUNT; x++) {
+	//		if (check_table[y][x])
+	//		{
+	//			gotoxy(x, y);
+	//			printf("% 2c", mine_table[y][x]);
+	//		}
+	//		else
+	//		{
+	//			gotoxy(x, y);
+	//			printf("■");
+	//		}
+	//			
+	//	}
+	//	printf("\n"); // 줄바꿈
+	//}
+	//printf("\n");	// 줄바꿈
+
+
+
 }
