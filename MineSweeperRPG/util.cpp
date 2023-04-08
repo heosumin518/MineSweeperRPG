@@ -3,7 +3,7 @@
 
 void init()
 {
-	system("mode con cols=118 lines=36 | title 지뢰찾기 RPG");		// 콘솔창 크기 초기화
+	system("mode con cols=110 lines=36 | title 지뢰찾기 RPG");		// 콘솔창 크기 초기화
 	setCursorView(false);
 }
 
@@ -19,4 +19,10 @@ void gotoxy(int x, int y)
 void setCursorView(bool visible) {
 	CONSOLE_CURSOR_INFO cursor = { 1, visible };
 	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursor);
+}
+
+void ColorSet(int backColor, int textColor)
+{
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleTextAttribute(handle, (backColor << 4) + textColor);
 }

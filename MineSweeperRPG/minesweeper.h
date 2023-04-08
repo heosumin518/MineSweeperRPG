@@ -4,6 +4,7 @@
 #include <stdlib.h>		// srand, rand 함수 사용
 #include <time.h>
 #include <memory.h>		// memset 함수 사용
+#include "ui.h"
 
 #ifndef COUNT
 #define COUNT
@@ -14,7 +15,7 @@
 
 #endif
 
-int mineSweeper(int, int);
+int mineSweeper(int, int, int);
 void createMineTable(char mine_table[][X_COUNT], char check_table[][X_COUNT], char flag_table[][X_COUNT]);		// 지뢰찾기맵 생성
 void showMineTable(char mine_table[][X_COUNT]);			/*** draw.cpp 만들어서 옮길까 고민중 ***/
 void showCurrentState(char mine_table[][X_COUNT], char check_table[][X_COUNT]);
