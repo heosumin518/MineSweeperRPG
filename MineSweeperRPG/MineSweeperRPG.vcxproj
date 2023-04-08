@@ -138,9 +138,13 @@
     <ClInclude Include="gameManager.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="minesweeper.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="title.h" />
     <ClInclude Include="ui.h" />
     <ClInclude Include="util.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MineSweeperRPG.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
