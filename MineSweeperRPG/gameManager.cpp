@@ -1,5 +1,6 @@
 #include "gameManager.h"
 
+
 bool gamePlay()		// 승리 여부 반환하기
 {
 	int gameMode = 0;	// 0은 플레이어 1은 몬스터의 턴
@@ -10,11 +11,14 @@ bool gamePlay()		// 승리 여부 반환하기
 	int round = 0;	// 라운드 수
 	bool isWin = false;
 
+	
+
 	system("cls");
 
 	while (true)		// 여기에 몬스터 HP 변수를 넣어도?
 	{
-		gotoxy(50, 30);
+
+		gotoxy(49, 30);
 		printf("HP: %2d / 10", playerHP);	// 플레이어 HP
 		gotoxy(50, 5);
 		printf("HP: %2d / 20", monsterHP);	// 몬스터 HP
@@ -29,6 +33,8 @@ bool gamePlay()		// 승리 여부 반환하기
 			isWin = false;
 			break;  // 플레이어의 HP가 0이 되면 게임종료
 		}
+
+		_getch();
 
 		flag = 0;
 		flag += mineSweeper(monsterHP, playerHP, gameMode);
@@ -49,7 +55,7 @@ bool gamePlay()		// 승리 여부 반환하기
 			gameMode = 0;
 		}
 
-		gotoxy(50, 30);
+		gotoxy(49, 30);
 		printf("HP: %2d / 10", playerHP);	// 플레이어 HP
 		gotoxy(50, 5);
 		printf("HP: %2d / 20", monsterHP);	// 몬스터 HP

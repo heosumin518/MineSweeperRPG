@@ -4,7 +4,7 @@
 #include <stdlib.h>		// srand, rand 함수 사용
 #include <time.h>
 #include <memory.h>		// memset 함수 사용
-#include "ui.h"
+#include "draw.h"
 
 #ifndef COUNT
 #define COUNT

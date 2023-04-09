@@ -30,7 +30,7 @@
     <ClCompile Include="minesweeper.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ui.cpp">
+    <ClCompile Include="draw.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,7 +50,7 @@
     <ClInclude Include="minesweeper.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ui.h">
+    <ClInclude Include="draw.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
@@ -61,5 +61,10 @@
     <ResourceCompile Include="MineSweeperRPG.rc">
       <Filter>리소스 파일</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\p1045\Downloads\minesweeperRPG.ico">
+      <Filter>리소스 파일</Filter>
+    </Image>
   </ItemGroup>
 </Project>

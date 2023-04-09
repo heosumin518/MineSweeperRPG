@@ -10,10 +10,13 @@ int main()
 	init();
 	while (true)
 	{
+		PlaySound(TEXT("title.wav"), NULL, SND_ASYNC | SND_LOOP);
 		titleDraw();
 		int menuCode = menuDraw();
 		bool isWin = false;
-		if		(menuCode == 0) {
+		if	(menuCode == 0) {
+			PlaySound(NULL, 0, 0);
+			drawStory();
 			isWin = gamePlay();
 			gotoxy(0, 35);
 			printf("게임종료");
@@ -30,6 +33,7 @@ int main()
 			system("pause");	// 디버깅용. 이후 삭제하기
 		}
 		else if (menuCode == 1) {
+			PlaySound(NULL, 0, 0);
 			howToPlay();	// 게임 방법
 		}
 		else if (menuCode == 2) {

@@ -131,7 +131,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="minesweeper.cpp" />
     <ClCompile Include="title.cpp" />
-    <ClCompile Include="ui.cpp" />
+    <ClCompile Include="draw.cpp" />
     <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,11 +140,14 @@
     <ClInclude Include="minesweeper.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="title.h" />
-    <ClInclude Include="ui.h" />
+    <ClInclude Include="draw.h" />
     <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="MineSweeperRPG.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\p1045\Downloads\minesweeperRPG.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

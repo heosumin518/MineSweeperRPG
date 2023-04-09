@@ -6,7 +6,7 @@ int mineSweeper(int monster, int player, int gameMode)
 {
 	//system("cls");
 
-	gotoxy(50, 30);
+	gotoxy(49, 30);
 	printf("HP: %2d / 10", player);	// 플레이어 HP
 	gotoxy(50, 5);
 	printf("HP: %2d / 20", monster);	// 몬스터 HP
