@@ -51,6 +51,8 @@ int mineSweeper(int monster, int player, int gameMode)
 	int m_row;
 	int ch = 0;
 
+	while (_kbhit()) // 현재까지의 입력 버퍼를 초기화한다.
+		_getch();
 	gotoxy(xx + x, yy + y);
 	while (true) {
 		m_col = x / 2;
@@ -67,9 +69,7 @@ int mineSweeper(int monster, int player, int gameMode)
 			{
 				setCursorView(false);	// 커서 안보이게 설정
 				printf(" *");
-				gotoxy(0, 35);
-				printf("라운드 종료");
-				Sleep(2000);
+
 				break;
 			}
 			else		// 폭탄이 아닐 경우
@@ -133,13 +133,10 @@ int mineSweeper(int monster, int player, int gameMode)
 						setCursorView(false);	// 커서 안보이게 설정
 						gotoxy(0, 14);
 
-						if (gameMode == 0)
+						if (gameMode == 0)	// 풀콤보시 데미지 2 증가
 						{
-							printf("퍼펙트! 데미지 2 증가!\n");	// 게임모드 변수 넣어서 조건문 걸기
 							flag += 2;
 						}
-
-						Sleep(2000);
 						break;
 					}
 				}
@@ -178,6 +175,9 @@ int mineSweeper(int monster, int player, int gameMode)
 		}
 		
 	}
+
+	
+
 
 	//showMineTable(mine_table);			// 전체 설치 정보를 확인한다.
 

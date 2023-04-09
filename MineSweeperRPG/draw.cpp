@@ -154,6 +154,7 @@ void drawStory()
 
 	setCursorView(true);
 	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
 	setCursorView(false);
 
 	char story2[255] = "당신은 버스시간에 늦지않게 부리나케 짐을 챙겨 집으로 향한다.";
@@ -184,6 +185,7 @@ void drawStory()
 
 	setCursorView(true);
 	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
 	setCursorView(false);
 
 	system("cls");
@@ -214,6 +216,7 @@ void drawStory()
 
 	setCursorView(true);
 	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
 	setCursorView(false);
 
 	char story4[255] = "출석률은 이미 80퍼센트대로 내려간 상태.무언가 조치를 취해야만 한다";
@@ -247,6 +250,7 @@ void drawStory()
 
 	setCursorView(true);
 	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
 	setCursorView(false);
 
 	char story5[255] = "출석경고의 위협을 받고 있는 당신!!";
@@ -319,6 +323,267 @@ void drawStory()
 
 		Sleep(10);
 	}
-
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
 	system("cls");
+}
+
+void drawIntro()
+{
+	system("cls");
+	Sleep(2500);
+	PlaySound(TEXT("appearance.wav"), NULL, SND_ASYNC);
+	Sleep(2500);
+
+	PlaySound(TEXT("monsterAppearance.wav"), NULL, SND_ASYNC);
+	_setmode(_fileno(stdout), _O_U16TEXT); // 출력 스트림의 인코딩 방식을 UTF-16LE로 변경
+	ColorSet(0, 15);	// 진한 흰색
+	gotoxy(44, 6);	wprintf(L" ▄▄▄▄▄▄▄ ▄▄▄▄▄ ▄▄▄▄▄▄▄ ");
+	gotoxy(44, 7);	wprintf(L" █ ▄▄▄ █  █▄▀  █ ▄▄▄ █ ");
+	gotoxy(44, 8);	wprintf(L" █ ███ █  ▀█▀▄ █ ███ █ ");
+	gotoxy(44, 9);	wprintf(L" █▄▄▄▄▄█ ▄ ▄▀█ █▄▄▄▄▄█ ");
+	gotoxy(44, 10);	wprintf(L" ▄▄ ▄▄ ▄ ▀██▀█ ▄     ▄ ");
+	gotoxy(44, 11);	wprintf(L" ▄ █▄ █▄ ▀▀▄ ▀ ▀█▄█▄   ");
+	gotoxy(44, 12);	wprintf(L" ▄▀▀▀▄█▄▀ ▀▄▀  ▀▄ ▀ █▀ ");
+	gotoxy(44, 13);	wprintf(L" ▄▄▄▄▄▄▄ ▀▀  ██▀ ▀▀█▀▄ ");
+	gotoxy(44, 14);	wprintf(L" █ ▄▄▄ █ ▄█▀▀▀▀ ▄██ ▄▀ ");
+	gotoxy(44, 15);	wprintf(L" █ ███ █ ▀▄▀▄▀██▄ ▀ ▄▄ ");
+	gotoxy(44, 16);	wprintf(L" █▄▄▄▄▄█ █▀▄▄██ █▀ ▄▀▀ ");
+	// 몬스터 (=무단결석)
+	ColorSet(0, 7);
+	_setmode(_fileno(stdout), _O_TEXT); // 출력 스트림의 인코딩 방식을 기본으로 변경
+
+
+	Sleep(2250);
+
+	while (_kbhit()) // 현재까지의 입력 버퍼를 초기화한다.
+		_getch();
+
+
+	char story1[255] = "이 녀석이 바로.우리가 물리쳐야하는 몬스터";
+	char* ptr = story1;
+
+	gotoxy(48, 23);
+
+	while (*ptr)
+	{
+		if (_kbhit())
+			break;
+
+		if (*ptr <= 128 && *ptr >= 0)
+		{
+			printf("%c", *ptr); Sleep(50);
+			ptr += 1;
+		}
+		else
+		{
+			printf("%c%c", *ptr, *(ptr + 1)); Sleep(50);
+			ptr += 2;
+		}
+
+		if (*ptr == '.')
+		{
+			Sleep(1000);
+			gotoxy(43, 26);
+			ptr += 1;
+		}
+	}
+	setCursorView(true);
+	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
+	setCursorView(false);
+
+	gotoxy(43, 23);
+	printf("                                                  ");
+	gotoxy(43, 26);
+	printf("                                                  ");
+
+	Sleep(500);
+	char story2[255] = "당신에게는.검과";
+	ptr = story2;
+
+	gotoxy(50, 23);
+
+	while (*ptr)
+	{
+		if (_kbhit())
+			break;
+
+		if (*ptr <= 128 && *ptr >= 0)
+		{
+			printf("%c", *ptr); Sleep(50);
+			ptr += 1;
+		}
+		else
+		{
+			printf("%c%c", *ptr, *(ptr + 1)); Sleep(50);
+			ptr += 2;
+		}
+
+		if (*ptr == '.')
+		{
+			Sleep(1000);
+			gotoxy(47, 26);
+			ptr += 1;
+		}
+	}
+
+	Sleep(1000);
+	PlaySound(TEXT("monsterAppearance.wav"), NULL, SND_ASYNC);
+	_setmode(_fileno(stdout), _O_U16TEXT); // 출력 스트림의 인코딩 방식을 UTF-16LE로 변경
+	ColorSet(0, 7);
+	gotoxy(74, 20);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣤⣤⣤⣤⣤⣤");
+	gotoxy(74, 21);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠛⠛⠛⠛⣿⣿");
+	gotoxy(74, 22);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠁⠀⠀⠀⠀⠀⣿⣿");
+	gotoxy(74, 23); wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠁⠀⣠⣄⠀⠀⠀⢀⣿⣿");
+	gotoxy(74, 24); wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠁⠀⣠⣾⡿⠋⠀⢀⣴⣿⡿⠋");
+	gotoxy(74, 25); wprintf(L"⠀⠀⠀⢀⣄⠀⣠⣾⣿⠟⠁⠀⣠⣾⡿⠋⠀⢀⣴⣿⡿⠋⠀⠀");
+	gotoxy(74, 26); wprintf(L"⠀⠀⠀⠻⣿⣿⣿⠟⠁⠀⣠⣾⡿⠋⠀⢀⣴⣿⡿⠋⠀⠀⠀⠀");
+	gotoxy(74, 27); wprintf(L"⠀⠀⠀⠀⠈⣻⣿⣷⣤⣾⡿⠋⠀⢀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀");
+	gotoxy(74, 28); wprintf(L"⠀⠀⠀⣠⣾⣿⠟⠻⣿⣿⣄⢀⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(74, 29); wprintf(L"⠀⣠⣾⣿⣿⣅⢀⣴⣿⡿⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(74, 30); wprintf(L"⣼⣿⠟⠉⢻⣿⣿⡿⠋⠀⠈⠻⣿⠗⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(74, 31); wprintf(L"⢻⣿⣦⣴⣿⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(74, 32); wprintf(L"⠀⠉⠛⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	// 검 (=플레이어의 턴)
+	ColorSet(0, 7);
+	_setmode(_fileno(stdout), _O_TEXT); // 출력 스트림의 인코딩 방식을 기본으로 변경
+	
+	Sleep(1000);
+	char story3[255] = "방패가 있다";
+	ptr = story3;
+
+	gotoxy(52, 26);
+	while (*ptr)
+	{
+		if (_kbhit())
+			break;
+
+		if (*ptr <= 128 && *ptr >= 0)
+		{
+			printf("%c", *ptr); Sleep(50);
+			ptr += 1;
+		}
+		else
+		{
+			printf("%c%c", *ptr, *(ptr + 1)); Sleep(50);
+			ptr += 2;
+		}
+
+		if (*ptr == '.')
+		{
+			Sleep(1000);
+			gotoxy(43, 26);
+			ptr += 1;
+		}
+	}
+	Sleep(1000);
+	PlaySound(TEXT("monsterAppearance.wav"), NULL, SND_ASYNC);
+	_setmode(_fileno(stdout), _O_U16TEXT); // 출력 스트림의 인코딩 방식을 UTF-16LE로 변경
+	gotoxy(8, 18);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 19);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⣿⣿⣷⣦⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 20);	wprintf(L"⠀⠀⠀⠀⠀⠀⣤⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣤⣤⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 21);	wprintf(L"⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 22);	wprintf(L"⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 23);	wprintf(L"⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 24);	wprintf(L"⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 25);	wprintf(L"⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 26);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⢹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 27);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 28);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 29);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 30);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⣿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 31);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠻⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	gotoxy(8, 32);	wprintf(L"⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+	// 방패 (=몬스터의 턴)
+	ColorSet(0, 7);
+	_setmode(_fileno(stdout), _O_TEXT); // 출력 스트림의 인코딩 방식을 기본으로 변경
+
+
+	setCursorView(true);
+	gotoxy(63, 26);
+	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
+	setCursorView(false);
+
+
+	gotoxy(43, 23);
+	printf("                           ");
+	gotoxy(43, 26);
+	printf("                           ");
+	Sleep(1000);
+	char story4[255] = "공격과 방어를 반복하여.QR 코드 물리치기";
+	ptr = story4;
+
+	gotoxy(44, 23);
+	while (*ptr)
+	{
+		if (_kbhit())
+			break;
+
+		if (*ptr <= 128 && *ptr >= 0)
+		{
+			printf("%c", *ptr); Sleep(50);
+			ptr += 1;
+		}
+		else
+		{
+			printf("%c%c", *ptr, *(ptr + 1)); Sleep(50);
+			ptr += 2;
+		}
+
+		if (*ptr == '.')
+		{
+			Sleep(1000);
+			gotoxy(47, 26);
+			ptr += 1;
+		}
+	}
+
+	setCursorView(true);
+	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
+	setCursorView(false);
+
+
+	gotoxy(43, 23);
+	printf("                           ");
+	gotoxy(43, 26);
+	printf("                           ");
+	Sleep(1000);
+	char story5[255] = "그럼.게임,,,,,,,,,,시작!";
+	ptr = story5;
+
+	gotoxy(45, 23);
+	while (*ptr)
+	{
+		if (_kbhit())
+			break;
+
+		if (*ptr <= 128 && *ptr >= 0)
+		{
+			printf("%c", *ptr); Sleep(50);
+			ptr += 1;
+		}
+		else
+		{
+			printf("%c%c", *ptr, *(ptr + 1)); Sleep(50);
+			ptr += 2;
+		}
+
+		if (*ptr == '.')
+		{
+			Sleep(1000);
+			gotoxy(46, 26);
+			ptr += 1;
+		}
+	}
+
+	setCursorView(true);
+	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
+	setCursorView(false);
+
+
+	while (_kbhit()) // 현재까지의 입력 버퍼를 초기화한다.
+		_getch();
 }

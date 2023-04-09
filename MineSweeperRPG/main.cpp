@@ -10,14 +10,16 @@ int main()
 	init();
 	while (true)
 	{
-		PlaySound(TEXT("title.wav"), NULL, SND_ASYNC | SND_LOOP);
+		PlaySound(TEXT("title.wav"), NULL, SND_ASYNC | SND_LOOP);	// 타이틀 배경음 재생
 		titleDraw();
 		int menuCode = menuDraw();
 		bool isWin = false;
 		if	(menuCode == 0) {
 			PlaySound(NULL, 0, 0);
 			drawStory();
+			drawIntro();
 			isWin = gamePlay();
+			PlaySound(NULL, 0, 0);
 			gotoxy(0, 35);
 			printf("게임종료");
 			if (isWin)
@@ -26,6 +28,7 @@ int main()
 				printf("플레이어의 승리!");
 			}
 			else
+
 			{
 				gotoxy(40, 35);
 				printf("패배..!");

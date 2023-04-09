@@ -11,3 +11,5 @@ void drawStory();
 void drawEnding();	// 매개변수로 게임 승리여부 전달하기
 
 void drawTime(int, int, int);
+
+void drawIntro();
