@@ -20,24 +20,14 @@ int main()
 			drawIntro();
 			isWin = gamePlay();
 			PlaySound(NULL, 0, 0);
-			gotoxy(0, 35);
-			printf("게임종료");
-			if (isWin)
-			{
-				gotoxy(40, 35);
-				printf("플레이어의 승리!");
-			}
-			else
 
-			{
-				gotoxy(40, 35);
-				printf("패배..!");
-			}
-			system("pause");	// 디버깅용. 이후 삭제하기
+			drawEnding(isWin);	// 엔딩 출력 후 게임 종료
+
+			PlaySound(NULL, 0, 0);
 		}
 		else if (menuCode == 1) {
 			PlaySound(NULL, 0, 0);
-			howToPlay();	// 게임 방법
+			drawHowTo();	// 게임 방법
 		}
 		else if (menuCode == 2) {
 			return 0;		// 종료

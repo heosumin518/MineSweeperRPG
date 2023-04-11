@@ -67,4 +67,27 @@
       <Filter>리소스 파일</Filter>
     </Image>
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\x64\Debug\appearance.wav">
+      <Filter>헤더 파일</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\click.wav">
+      <Filter>헤더 파일</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\badEnd.wav">
+      <Filter>헤더 파일</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\gameStart.wav">
+      <Filter>헤더 파일</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\goodEnd.wav">
+      <Filter>헤더 파일</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\monsterAppearance.wav">
+      <Filter>헤더 파일</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\title.wav">
+      <Filter>헤더 파일</Filter>
+    </CopyFileToFolders>
+  </ItemGroup>
 </Project>

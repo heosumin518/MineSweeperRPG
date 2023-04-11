@@ -149,6 +149,29 @@
   <ItemGroup>
     <Image Include="C:\Users\p1045\Downloads\minesweeperRPG.ico" />
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\x64\Debug\appearance.wav">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\badEnd.wav">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\click.wav">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\gameStart.wav">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\goodEnd.wav">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\monsterAppearance.wav">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="..\x64\Debug\title.wav">
+      <FileType>Document</FileType>
+    </CopyFileToFolders>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

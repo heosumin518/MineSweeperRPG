@@ -126,7 +126,7 @@ void drawStory()
 	char story1 [255] = "오후 5시.수업이 끝나는 시간";
 	char* ptr = story1;
 
-	gotoxy(15, 15);
+	gotoxy(15, 14);
 
 	while (*ptr)
 	{
@@ -161,7 +161,7 @@ void drawStory()
 	ptr = story2;
 
 	system("cls");
-	gotoxy(15, 15);
+	gotoxy(15, 14);
 	Sleep(1000);
 	while (*ptr)
 	{
@@ -189,7 +189,7 @@ void drawStory()
 	setCursorView(false);
 
 	system("cls");
-	gotoxy(15, 15);
+	gotoxy(15, 14);
 	Sleep(1000);
 	while (*ptr)
 	{
@@ -223,7 +223,7 @@ void drawStory()
 	ptr = story4;
 
 	system("cls");
-	gotoxy(15, 15);
+	gotoxy(15, 14);
 	Sleep(1000);
 	while (*ptr)
 	{
@@ -257,7 +257,7 @@ void drawStory()
 	ptr = story5;
 
 	system("cls");
-	gotoxy(15, 15);
+	gotoxy(15, 14);
 	Sleep(1000);
 	while (*ptr)
 	{
@@ -586,4 +586,127 @@ void drawIntro()
 
 	while (_kbhit()) // 현재까지의 입력 버퍼를 초기화한다.
 		_getch();
+}
+
+void drawEnding(bool isWin)
+{
+	system("cls");
+
+	while (_kbhit()) // 현재까지의 입력 버퍼를 초기화한다.
+		_getch();
+
+	if (isWin == true)
+	{
+		PlaySound(TEXT("goodEnd.wav"), NULL, SND_ASYNC | SND_LOOP);	// 굿 엔딩 배경음 재생
+		gotoxy(15, 15);
+		char story1[255] = "Ending 1) 굿 엔딩.출석률 100\% 달성!";
+		char* ptr = story1;
+
+		gotoxy(40, 15);
+
+		Sleep(1000);
+		while (*ptr)
+		{
+			//if (_kbhit())
+				//break;
+
+			if (*ptr <= 128 && *ptr >= 0)
+			{
+				printf("%c", *ptr); Sleep(50);
+				ptr += 1;
+			}
+			else
+			{
+				printf("%c%c", *ptr, *(ptr + 1)); Sleep(50);
+				ptr += 2;
+			}
+			if (*ptr == '.')
+			{
+				Sleep(1000);
+				gotoxy(40, 18);
+				ptr += 1;
+			}
+		}
+	}
+	else if (isWin == false)
+	{
+		PlaySound(TEXT("badEnd.wav"), NULL, SND_ASYNC | SND_LOOP);	// 배드 엔딩 배경음 재생
+		gotoxy(15, 15);
+		char story2[255] = "Ending 2) 배드엔딩!출석경고.. 교수님과의 면담시간";
+		char* ptr = story2;
+
+		gotoxy(40, 15);
+		Sleep(1000);
+		while (*ptr)
+		{
+			//if (_kbhit())
+				//break;
+
+			if (*ptr <= 128 && *ptr >= 0)
+			{
+				printf("%c", *ptr); Sleep(50);
+				ptr += 1;
+			}
+			else
+			{
+				printf("%c%c", *ptr, *(ptr + 1)); Sleep(50);
+				ptr += 2;
+			}
+			if (*ptr == '!')
+			{
+				Sleep(1000);
+				gotoxy(40, 18);
+				ptr += 1;
+			}
+		}
+	}
+
+	Sleep(5000);
+
+	while (_kbhit()) // 현재까지의 입력 버퍼를 초기화한다.
+		_getch();
+
+	setCursorView(true);
+	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
+	setCursorView(false);
+
+}
+
+void drawHowTo()
+{
+	system("cls");
+	int i = 1;
+	char story[500] = "<< 게임 플레이 방법 >>.본 게임은 지뢰찾기 게임에 RPG 요소를 살짝 가미한 턴제 RPG게임입니다!.플레이어 턴 과 몬스터 턴으로 구분이 되며.플레이어턴에는 플레이어가 몬스터에게 공격을 하고.몬스터 턴에는 몬스터가 플레이어에게 공격을 합니다.게임 방법은 플레이어턴과 몬스터턴 둘 다 동일!.최대한 많은 지뢰(이 게임에서는 폭탄과 방패)에 깃발 표시를 하여 게임에서 승리하세요!";
+	char* ptr = story;
+
+	gotoxy(15, 5);
+	while (*ptr)
+	{
+		if (_kbhit())
+			break;
+
+		if (*ptr <= 128 && *ptr >= 0)
+		{
+			printf("%c", *ptr); Sleep(30);
+			ptr += 1;
+		}
+		else
+		{
+			printf("%c%c", *ptr, *(ptr + 1)); Sleep(30);
+			ptr += 2;
+		}
+		if (*ptr == '.')
+		{
+			Sleep(300);
+			gotoxy(15, 8 + i);
+			ptr += 1;
+			i += 3;
+		}
+	}
+
+	setCursorView(true);
+	_getch();
+	PlaySound(TEXT("click.wav"), NULL, SND_ASYNC);
+	setCursorView(false);
 }
